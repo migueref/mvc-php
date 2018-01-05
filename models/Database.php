@@ -46,7 +46,8 @@ class Database
 			}
 		}
 	}
-	public function close() {
+	public function close()
+	{
 		if ($this->mysqli) {
 			$this->mysqli->close();
 		}
