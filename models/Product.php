@@ -16,8 +16,10 @@ class Product
 				productos";
 		$db = new Database();
 		if ($rows = $db->query($sql)) {
+			$db->close();
 			return $rows;
 		}
+		$db->close();
 		return false;
 	}
 }
