@@ -13,7 +13,7 @@ class Cleaner
 				    '@<style[^>]*?>.*?</style>@siU',
 				    '@<![sS]*?--[ tnr]*>@'
 			  	);
-		$output =preg_replace($search, '', $output);
+		$output =preg_replace($search, '', $input);
 		$output = htmlspecialchars($output, ENT_QUOTES);
 		$output  =addslashes(trim($output));
 		$output =addslashes(trim($output));
