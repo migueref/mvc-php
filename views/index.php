@@ -8,17 +8,45 @@
   <body>
 	  <main>
 	  	<button type="button" onclick="getProducts()">Hacer petición</button>
+          <table id="product-list" class="table">
+               <thead>
+                   <tr>
+                     <th scope="col">#</th>
+                     <th scope="col">Nombre</th>
+                     <th scope="col">Precio</th>
+                     <th scope="col">Descripción</th>
+                   </tr>
+               </thead>
+          </table>
 	  </main>
 	  	<script type="text/javascript">
 			function getProducts() {
 				var xhr = new XMLHttpRequest();
 				var url = 'http://localhost/mvc-pi/controllers/ProductsController.php';
 				xhr.open('GET', url, true);
-				xhr.addEventListener('error', function(e) {
-					console.log('Un error ocurrió', e);
-				});
 				xhr.addEventListener('loadend', function() {
-					console.log('xhr.readyState:', xhr.responseText);
+                         products = eval(xhr.responseText);
+                         products.forEach(function(product) {
+                              row = document.createElement("tr");
+                              idColumn = document.createElement("td");
+                              nameColumn = document.createElement("td");
+                              priceColumn = document.createElement("td");
+                              descriptionColumn = document.createElement("td");
+
+                              idColumn.innerHTML = product.id;
+                              nameColumn.innerHTML = product.nombre;
+                              priceColumn.innerHTML = product.precio ;
+                              descriptionColumn.innerHTML = product.descripcion;
+
+                              row.appendChild(idColumn);
+                              row.appendChild(nameColumn);
+                              row.appendChild(priceColumn);
+                              row.appendChild(descriptionColumn);
+
+                              document.querySelector("#product-list").appendChild(row);
+
+                         });
+
 				});
 				xhr.send();
 			}
